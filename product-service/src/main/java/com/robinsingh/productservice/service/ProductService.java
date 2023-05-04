@@ -6,19 +6,17 @@ import com.robinsingh.productservice.model.Product;
 import com.robinsingh.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ProductService {
 
     private final ProductRepository productRepository;
+
     public void createProduct(ProductRequest productRequest) {
         Product product = Product.builder()
                 .name(productRequest.getName())
