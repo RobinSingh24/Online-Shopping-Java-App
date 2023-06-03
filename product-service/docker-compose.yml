@@ -1,0 +1,14 @@
+services:
+  mongodb_data_cont:
+    image: mongo:latest
+    container_name: mongoDB-Cont
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mongodb_data_cont:/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  mongodb_data_cont:
