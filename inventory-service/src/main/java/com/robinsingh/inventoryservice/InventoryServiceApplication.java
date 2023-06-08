@@ -23,7 +23,7 @@ public class InventoryServiceApplication {
 					.build();
 			Inventory inventory1 = Inventory.builder()
 					.skuCode("iPad 8")
-					.quantity(200)
+					.quantity(0)
 					.build();
 			inventoryRepository.save(inventory);
 			inventoryRepository.save(inventory1);

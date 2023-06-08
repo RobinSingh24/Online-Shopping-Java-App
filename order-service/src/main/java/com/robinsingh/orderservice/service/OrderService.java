@@ -7,6 +7,7 @@ import com.robinsingh.orderservice.model.Order;
 import com.robinsingh.orderservice.model.OrderLineItems;
 import com.robinsingh.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -43,10 +45,10 @@ public class OrderService {
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
                 .block();
-
+        log.info(Arrays.toString(inventoryResponseArray));
         boolean allProductInStock = Arrays.stream(inventoryResponseArray)
                 .allMatch(InventoryResponse::isInStock);
-
+        log.info(String.valueOf(allProductInStock));
 
         if(allProductInStock)
             orderRepository.save(order);
