@@ -26,7 +26,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
 
-    public void placeOrder(OrderRequest orderRequest){
+    public String placeOrder(OrderRequest orderRequest){
         Order order = Order.builder()
                 .orderLineItemsList(
                         orderRequest.getOrderLineItemsDtoList().stream().map(this::mapToOrderList).toList()
@@ -51,7 +51,10 @@ public class OrderService {
         log.info(String.valueOf(allProductInStock));
 
         if(allProductInStock)
+        {
             orderRepository.save(order);
+            return "Order Placed Successfully";
+        }
         else
             throw new IllegalArgumentException("Product is not in inventory");
     }
