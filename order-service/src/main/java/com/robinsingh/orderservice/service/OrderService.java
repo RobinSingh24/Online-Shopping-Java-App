@@ -1,6 +1,6 @@
 package com.robinsingh.orderservice.service;
 
-import com.robinsingh.inventoryservice.dto.InventoryResponse;
+import com.robinsingh.orderservice.dto.InventoryResponse;
 import com.robinsingh.orderservice.dto.OrderLineItemsDto;
 import com.robinsingh.orderservice.dto.OrderRequest;
 import com.robinsingh.orderservice.event.OrderPlacedEvent;
