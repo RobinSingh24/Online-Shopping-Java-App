@@ -149,7 +149,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
     depends_on:
-      - postgres-order
+      - mysql-db
       - broker
       - zipkin
       - discovery-server
@@ -164,7 +164,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
     depends_on:
-      - postgres-inventory
+      - mysql-db
       - discovery-server
       - api-gateway
 
