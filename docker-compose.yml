@@ -34,7 +34,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
     volumes:
-      - mongodb_data_cont:/data/db
+      - ./mongodb_data_cont:/data/db
     ports:
       - "27017:27017"
 
@@ -60,12 +60,12 @@ services:
       - '3306'
       # Where our data will be persisted
     volumes:
-      - my-db:/var/lib/mysql
+      - ./my-db:/var/lib/mysql
 
   ## Keycloak Config with Mysql database
   keycloak-mysql:
     container_name: keycloak-mysql
-    image: mysql:5.7
+    image: mysql:latest
     volumes:
       - ./mysql_keycloak_data:/var/lib/mysql
     environment:
@@ -136,7 +136,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
-      - mongo
+      - mongodb_data_cont
       - discovery-server
       - api-gateway
 
@@ -149,7 +149,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
     depends_on:
-      - mysql-db
+      - db
       - broker
       - zipkin
       - discovery-server
@@ -164,7 +164,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
     depends_on:
-      - mysql-db
+      - db
       - discovery-server
       - api-gateway
 
@@ -183,7 +183,7 @@ services:
 
   ## Prometheus
   prometheus:
-    image: prom/prometheus:v2.37.1
+    image: prom/prometheus:v2.37.7
     container_name: prometheus
     restart: unless-stopped
     ports:
